@@ -49,7 +49,7 @@ metadata:
     app.kubernetes.io/name: nginx-ingress
   namespace: https
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: https
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   tls:
     - hosts:
