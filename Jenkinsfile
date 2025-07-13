@@ -11,6 +11,11 @@ pipeline {
                 sh 'kubectl get nodes'
             }
         }
+        stage('Checkout scm'){
+            steps {
+                checkout scm
+            }
+        }
         stage('Create TLS Secret'){
             steps{
                 withCredentials([
