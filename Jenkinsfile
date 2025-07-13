@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Deploy nginx'){
             steps{
-                sh 'kubectl apply -f inggress.yaml -n https'
+                sh 'kubectl apply -f ingress.yaml -n https'
             }
         }
     }
