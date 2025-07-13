@@ -16,6 +16,11 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Cleanup'){
+            steps{
+                sh 'kubectl delete -f ingress.yaml -n https'
+            }
+        }
         stage('Create TLS Secret'){
             steps{
                 withCredentials([
