@@ -14,7 +14,7 @@ pipeline {
         stage('Create TLS Secret'){
             steps{
                 withCredentials([
-                    file(credentialsId: 'fuuchain', variable: 'FULLCHAIN'),
+                    file(credentialsId: 'fullchain', variable: 'FULLCHAIN'),
                     file(credentialsId: 'privkey', variable: 'PRIVKEY')
                 ]){
                     sh '''
