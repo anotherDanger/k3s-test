@@ -18,6 +18,7 @@ pipeline {
                     file(credentialsId: 'privkey', variable: 'PRIVKEY')
                 ]){
                     sh '''
+                        kubectl create namespace https --dry-run=client -o yaml | kubectl apply -f -
                         kubectl create secret tls k8s4life \
                             --cert=$FULLCHAIN \
                             --key=$PRIVKEY \
