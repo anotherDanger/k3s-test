@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: startup-nginx
+spec:
+  selector:
+    matchLabels:
+      app: startup-nginx
+  template:
+    metadata:
+      labels:
+        app: startup-nginx
+    spec:
+      containers:
+      - name: nginx-raw
+        image: nginx:latest
+        resources:
+          requests:
+            memory: "28Mi"
+            cpu: "20m"
+          limits:
+            memory: "108Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 80
+        startupProbe:
+          tcpSocket:
+            port: 8080
+          failureThreshold: 30
+          periodSeconds: 5
+
