@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-private-registry
+spec:
+  selector:
+    matchLabels:
+      app: my-private-registry
+  template:
+    metadata:
+      labels:
+        app: my-private-registry
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+      - name: my-private-registry
+        image: ghcr.io/anotherdanger/go-k8s:1.0
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
