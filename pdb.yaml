@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-pdb
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx-pdb
+  template:
+    metadata:
+      labels:
+        app: nginx-pdb
+    spec:
+      containers:
+      - name: nginx-pdb
+        image: nginx:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx-pdb
+spec:
+  minAvailable: 9
+  selector:
+    matchLabels:
+      app: nginx-pdb
+
+
